@@ -23,15 +23,14 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 DistrhoUIXuXu::DistrhoUIXuXu()
-    : UI()
+    : UI(300, 300)
 {
-    setSize(300, 300);
 }
 
 // -----------------------------------------------------------------------
 // DSP Callbacks
 
-void DistrhoUIXuXu::d_parameterChanged(uint32_t index, float /*value*/)
+void DistrhoUIXuXu::parameterChanged(uint32_t index, float /*value*/)
 {
     switch (index)
     {
@@ -43,7 +42,7 @@ void DistrhoUIXuXu::d_parameterChanged(uint32_t index, float /*value*/)
     }
 }
 
-void DistrhoUIXuXu::d_stateChanged(const char*, const char*)
+void DistrhoUIXuXu::stateChanged(const char*, const char*)
 {
 }
 

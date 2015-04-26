@@ -25,13 +25,13 @@ DistrhoPluginXuXu::DistrhoPluginXuXu()
     : Plugin(kParameterCount, 0, 0) // 0 programs, 0 states
 {
     // reset
-    d_deactivate();
+    deactivate();
 }
 
 // -----------------------------------------------------------------------
 // Init
 
-void DistrhoPluginXuXu::d_initParameter(uint32_t index, Parameter& /*parameter*/)
+void DistrhoPluginXuXu::initParameter(uint32_t index, Parameter& /*parameter*/)
 {
     switch (index)
     {
@@ -48,14 +48,14 @@ void DistrhoPluginXuXu::d_initParameter(uint32_t index, Parameter& /*parameter*/
     }
 }
 
-void DistrhoPluginXuXu::d_initState(uint32_t, d_string&, d_string&)
+void DistrhoPluginXuXu::initState(uint32_t, const char*, String&)
 {
 }
 
 // -----------------------------------------------------------------------
 // Internal data
 
-float DistrhoPluginXuXu::d_getParameterValue(uint32_t index) const
+float DistrhoPluginXuXu::getParameterValue(uint32_t index) const
 {
     switch (index)
     {
@@ -68,7 +68,7 @@ float DistrhoPluginXuXu::d_getParameterValue(uint32_t index) const
     }
 }
 
-void DistrhoPluginXuXu::d_setParameterValue(uint32_t index, float /*value*/)
+void DistrhoPluginXuXu::setParameterValue(uint32_t index, float /*value*/)
 {
     switch (index)
     {
@@ -78,22 +78,22 @@ void DistrhoPluginXuXu::d_setParameterValue(uint32_t index, float /*value*/)
     }
 }
 
-void DistrhoPluginXuXu::d_setState(const char*, const char*)
+void DistrhoPluginXuXu::setState(const char*, const char*)
 {
 }
 
 // -----------------------------------------------------------------------
 // Process
 
-void DistrhoPluginXuXu::d_activate()
+void DistrhoPluginXuXu::activate()
 {
 }
 
-void DistrhoPluginXuXu::d_deactivate()
+void DistrhoPluginXuXu::deactivate()
 {
 }
 
-void DistrhoPluginXuXu::d_run(const float**, float** outputs, uint32_t frames, const MidiEvent*, uint32_t)
+void DistrhoPluginXuXu::run(const float**, float** outputs, uint32_t frames, const MidiEvent*, uint32_t)
 {
     float* const out1 = outputs[0];
     float* const out2 = outputs[1];

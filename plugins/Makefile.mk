@@ -29,14 +29,14 @@ endif
 # --------------------------------------------------------------
 # Set plugin binary file targets
 
-jack       = $(TARGET_DIR)/$(NAME)
-ladspa_dsp = $(TARGET_DIR)/$(NAME)-ladspa.$(EXT)
-dssi_dsp   = $(TARGET_DIR)/$(NAME)-dssi.$(EXT)
-dssi_ui    = $(TARGET_DIR)/$(NAME)-dssi/$(NAME)_ui
-lv2        = $(TARGET_DIR)/$(NAME).lv2/$(NAME).$(EXT)
-lv2_dsp    = $(TARGET_DIR)/$(NAME).lv2/$(NAME)_dsp.$(EXT)
-lv2_ui     = $(TARGET_DIR)/$(NAME).lv2/$(NAME)_ui.$(EXT)
-vst        = $(TARGET_DIR)/$(NAME)-vst.$(EXT)
+jack       = $(TARGET_DIR)/$(NAME)$(APP_EXT)
+ladspa_dsp = $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT)
+dssi_dsp   = $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT)
+dssi_ui    = $(TARGET_DIR)/$(NAME)-dssi/$(NAME)_ui$(APP_EXT)
+lv2        = $(TARGET_DIR)/$(NAME).lv2/$(NAME)$(LIB_EXT)
+lv2_dsp    = $(TARGET_DIR)/$(NAME).lv2/$(NAME)_dsp$(LIB_EXT)
+lv2_ui     = $(TARGET_DIR)/$(NAME).lv2/$(NAME)_ui$(LIB_EXT)
+vst        = $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT)
 
 # --------------------------------------------------------------
 # Set distrho code files
@@ -53,13 +53,13 @@ all:
 # Common
 
 %.c.o: %.c
-	$(CC) $< $(BUILD_C_FLAGS) -c -o $@
+	$(CC) $< $(BUILD_C_FLAGS) -MD -MP -c -o $@
 
 %.cpp.o: %.cpp
-	$(CXX) $< $(BUILD_CXX_FLAGS) -c -o $@
+	$(CXX) $< $(BUILD_CXX_FLAGS) -MD -MP -c -o $@
 
 clean:
-	rm -f *.o
+	rm -f *.d *.o
 	rm -rf $(TARGET_DIR)/$(NAME) $(TARGET_DIR)/$(NAME)-* $(TARGET_DIR)/$(NAME).lv2/
 
 # --------------------------------------------------------------
@@ -122,5 +122,10 @@ vst: $(vst)
 $(vst): $(OBJS_DSP) $(OBJS_UI) $(DISTRHO_PLUGIN_FILES) $(DISTRHO_UI_FILES)
 	mkdir -p $(shell dirname $@)
 	$(CXX) $^ $(BUILD_CXX_FLAGS) $(LINK_FLAGS) $(DGL_LIBS) $(SHARED) -DDISTRHO_PLUGIN_TARGET_VST -o $@
+
+# --------------------------------------------------------------
+
+-include $(OBJS_DSP:%.o=%.d)
+-include $(OBJS_UI:%.o=%.d)
 
 # --------------------------------------------------------------

@@ -33,8 +33,8 @@ protected:
     // -------------------------------------------------------------------
     // DSP Callbacks
 
-    void d_parameterChanged(uint32_t index, float value) override;
-    void d_stateChanged(const char*, const char*) override;
+    void parameterChanged(uint32_t index, float value) override;
+    void stateChanged(const char*, const char*) override;
 
     // -------------------------------------------------------------------
     // Widget Callbacks
